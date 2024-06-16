@@ -18,7 +18,25 @@ export default function Login() {
   const [emailAddress, setEmailAddress] = useState('')
   const [password, setPassword] = useState('')
 
-  const onSignInPres = async () => {}
+  const onSignInPres = async () => {
+    if (!isLoaded) {
+      return
+    }
+
+    setLoading(true)
+    try {
+      const completeSignIn = await signIn.create({
+        identifier: emailAddress,
+        password,
+      })
+
+      await setActive({ session: completeSignIn.createdSessionId })
+    } catch (err: any) {
+      alert(err.errors[0].message)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <View style={styles.container}>

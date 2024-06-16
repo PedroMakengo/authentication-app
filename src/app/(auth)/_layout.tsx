@@ -5,11 +5,14 @@ import { useAuth } from '@clerk/clerk-expo'
 
 export function LogoutButton() {
   const { signOut } = useAuth()
+
   const doLogout = () => {
     signOut()
+
+    console.log('Terminado')
   }
   return (
-    <Pressable>
+    <Pressable onPress={doLogout}>
       <Ionicons name="log-out-outline" size={24} color={'#fff'} />
     </Pressable>
   )
